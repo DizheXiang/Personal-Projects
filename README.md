@@ -1,11 +1,8 @@
-# My Personal Project
+# Receipt Recorder
 
-## A subtitle
+## A manager of your expenses
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
-
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+**Function**:
+- enter your expense *amount* and *data*
+- summary the *total* expense for one day
+- set and check *budget*
