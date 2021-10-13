@@ -5,6 +5,11 @@ public class ReceiptRecorder {
     private String item;
     private String date;
 
+    // EFFECTS: construct a new receipt recorder
+    public ReceiptRecorder() {
+        ReceiptRecorder receiptRecorder = new ReceiptRecorder();
+    }
+
     public void addReceipt(double amount, String item, String date) {
         this.amount = amount;
         this.item = item;

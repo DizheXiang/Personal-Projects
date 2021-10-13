@@ -1,6 +1,19 @@
 package model;
 
+import java.util.Date;
+
 public class Budget {
+    private double amount;
+    private String startDate;
+    private String endDate;
+
+    // EFFECTS: construct a budget
+    public Budget(double amount, String startDate, String endDate) {
+        this.amount = amount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public void addBudget(String budgetAmount, String startDate, String endDate) {
     }
 
