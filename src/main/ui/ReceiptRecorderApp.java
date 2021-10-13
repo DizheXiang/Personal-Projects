@@ -29,10 +29,21 @@ public class ReceiptRecorderApp {
     }
 
     // MODIFIES: this
+    // EFFECTS: initializes fields
+    private void initial() {
+        receiptRecorder = new ReceiptRecorder();
+        budget = new Budget();
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
+    }
+
+    // MODIFIES: this
     // EFFECTS: processes user's command or quit app
     private void runReceiptRecorder() {
         boolean keepRunning = true;
-        String operation = null;
+        String operation;
+
+        initial();
 
         while (keepRunning) {
             System.out.println(selectYourOperation);
@@ -48,23 +59,33 @@ public class ReceiptRecorderApp {
     }
 
     // EFFECTS: go to different operations based on user's choice
+    @SuppressWarnings("methodlength")
     private void processOperation(String operation) {
-        if (operation == "1") {
-            createNewReceipt();
-        } else if (operation == "2") {
-            changeReceipt();
-        } else if (operation == "3") {
-            deleteReceipt();
-        } else if (operation == "4") {
-            addBudget();
-        } else if (operation == "5") {
-            changeBudget();
-        } else if (operation == "6") {
-            deleteBudget();
-        } else if (operation == "7") {
-            checkExpenses();
-        } else if (operation == "8") {
-            checkBudget();
+        switch (operation) {
+            case "1":
+                createNewReceipt();
+                break;
+            case "2":
+                changeReceipt();
+                break;
+            case "3":
+                deleteReceipt();
+                break;
+            case "4":
+                addBudget();
+                break;
+            case "5":
+                changeBudget();
+                break;
+            case "6":
+                deleteBudget();
+                break;
+            case "7":
+                checkExpenses();
+                break;
+            case "8":
+                checkBudget();
+                break;
         }
     }
 
@@ -90,13 +111,13 @@ public class ReceiptRecorderApp {
         receiptRecorder.findReceipt(date, item);
 
         System.out.println("What do you want to change? amount/item/date/nothing");
-        while (input.nextLine() != "nothing") {
+        while (!input.nextLine().equals("nothing")) {
             makeChangeForReceipt();
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: delete a existed receipt
+    // EFFECTS: delete an existed receipt
     private void deleteReceipt() {
         System.out.println("Enter the date of receipt you want to delete(MM/DD/YYYY)");
         String date = input.nextLine();
@@ -122,7 +143,7 @@ public class ReceiptRecorderApp {
     // EFFECTS: change the budget
     private void changeBudget() {
         System.out.println("Enter what do you want to change? amount/item/start date/end date/nothing");
-        while (input.nextLine() != "nothing") {
+        while (!input.nextLine().equals("nothing")) {
             makeChangeForBudget();
         }
     }
@@ -159,13 +180,13 @@ public class ReceiptRecorderApp {
     // MODIFIES: this
     // EFFECTS: update the information about chosen receipt
     private void makeChangeForReceipt() {
-        if (input.nextLine() == "amount") {
+        if (input.nextLine().equals("amount")) {
             double newAmount = input.nextDouble();
             receiptRecorder.changeAmount(newAmount);
-        } else if (input.nextLine() == "item") {
+        } else if (input.nextLine().equals("item")) {
             String newItem = input.nextLine();
             receiptRecorder.changeItem(newItem);
-        } else if (input.nextLine() == "date") {
+        } else if (input.nextLine().equals("date")) {
             String newDate = input.nextLine();
             receiptRecorder.changeDate(newDate);
         }
@@ -174,16 +195,16 @@ public class ReceiptRecorderApp {
     // MODIFIES: this
     // EFFECTS: update the information about budget
     private void makeChangeForBudget() {
-        if (input.nextLine() == "amount") {
+        if (input.nextLine().equals("amount")) {
             double newAmount = input.nextDouble();
             budget.changeAmount(newAmount);
-        } else if (input.nextLine() == "item") {
+        } else if (input.nextLine().equals("item")) {
             String newItem = input.nextLine();
             budget.changeItem(newItem);
-        } else if (input.nextLine() == "start date") {
+        } else if (input.nextLine().equals("start date")) {
             String newStartDate = input.nextLine();
             budget.changeStartDate(newStartDate);
-        } else if (input.nextLine() == "end date") {
+        } else if (input.nextLine().equals("end date")) {
             String newEndDate = input.nextLine();
             budget.changeEndDate(newEndDate);
         }

@@ -1,7 +1,7 @@
 package model;
 
 public class Budget {
-    public static void addBudget(String budgetAmount, String startDate, String endDate) {
+    public void addBudget(String budgetAmount, String startDate, String endDate) {
     }
 
     public void changeAmount(double newAmount) {
