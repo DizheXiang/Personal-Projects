@@ -22,4 +22,11 @@ public class ReceiptRecorder {
 
     public void changeDate(String newDate) {
     }
+
+    public void removeReceipt() {
+    }
+
+    public double checkExpenses(String startDate, String endDate) {
+        return 0.00;
+    }
 }
