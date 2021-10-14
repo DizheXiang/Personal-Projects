@@ -99,11 +99,11 @@ public class ReceiptRecorderApp {
     private void createNewReceipt() {
         System.out.println("Enter your new receipt in $: ");
         double amount = input.nextDouble();
+        System.out.println("What is the date(Month/Day/Year): ");
+        setDate();
         System.out.println("What did you buy: ");
         String item = input.nextLine();
-        System.out.println("What is the date(Month/Day/Year): ");
-        String date = input.nextLine();
-        receiptRecorder.addReceipt(amount,item,date);
+        receiptRecorder.addReceipt(amount,date,item);
     }
 
     // MODIFIES: this
@@ -206,6 +206,7 @@ public class ReceiptRecorderApp {
             budget.changeItem(newItem);
         } else if (input.nextLine().equals("start date (Month/Day/Year)")) {
             setDate();
+            budget.changeStartDate(date);
         }
     }
 

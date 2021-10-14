@@ -10,8 +10,4 @@ public class Date {
         this.day = day;
         this.year = year;
     }
-
-    public Date findEndDate(Date startDate) {
-        return new Date(1,1,2021);
-    }
 }
