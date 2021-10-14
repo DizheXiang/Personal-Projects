@@ -1,20 +1,22 @@
 package model;
 
-import java.util.Date;
-
 public class Budget {
     private double amount;
-    private String startDate;
-    private String endDate;
+    private model.Date startDate;
+    private model.Date endDate;
 
     // EFFECTS: construct a budget
-    public Budget(double amount, String startDate, String endDate) {
+    public Budget(double amount, model.Date startDate) {
         this.amount = amount;
         this.startDate = startDate;
-        this.endDate = endDate;
+        this.endDate = findEndDate(startDate);
     }
 
-    public void addBudget(String budgetAmount, String startDate, String endDate) {
+    private Date findEndDate(Date startDate) {
+        return new Date(01,01,2021);
+    }
+
+    public void addBudget(String budgetAmount, Date startDate) {
     }
 
     public void changeAmount(double newAmount) {
@@ -23,10 +25,7 @@ public class Budget {
     public void changeItem(String newItem) {
     }
 
-    public void changeStartDate(String newStartDate) {
-    }
-
-    public void changeEndDate(String newEndDate) {
+    public void changeStartDate(Date newStartDate) {
     }
 
     public void removeBudget() {
