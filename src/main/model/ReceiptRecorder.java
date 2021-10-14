@@ -16,7 +16,7 @@ public class ReceiptRecorder {
         this.date = date;
     }
 
-    public void findReceipt(String date, String item) {
+    public void findReceipt(Date date, String item) {
     }
 
     public void changeAmount(double newAmount) {
@@ -25,13 +25,13 @@ public class ReceiptRecorder {
     public void changeItem(String newItem) {
     }
 
-    public void changeDate(String newDate) {
+    public void changeDate(Date newDate) {
     }
 
     public void removeReceipt() {
     }
 
-    public double checkExpenses(String startDate, String endDate) {
+    public double checkExpenses(Date startDate, Date endDate) {
         return 0.00;
     }
 }
