@@ -13,25 +13,33 @@ public class Budget {
         this.endDate = findEndDate(startDate);
     }
 
-    private Date findEndDate(Date startDate) {
+    // MODIFIES: this
+    // EFFECTS: produce the end date after a month after given start date
+    public Date findEndDate(Date startDate) {
         return new Date(1,1,2021);
     }
 
+    // MODIFIES: this
+    // EFFECTS: create a budget given by amount and start date of budget
     public void addBudget(String budgetAmount, Date startDate) {
     }
 
+    // MODIFIES: this
+    // EFFECTS: change the amount of budget
     public void changeAmount(double newAmount) {
     }
 
-    public void changeItem(String newItem) {
-    }
-
+    // MODIFIES: this
+    // EFFECTS: change the start date of budget
     public void changeStartDate(Date newStartDate) {
     }
 
+    // MODIFIES: this
+    // EFFECTS: remove a budget
     public void removeBudget() {
     }
 
+    // EFFECTS: check whether the budget is reached
     public boolean checkBudget() {
         return false;
     }
