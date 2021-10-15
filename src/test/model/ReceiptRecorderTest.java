@@ -15,7 +15,7 @@ public class ReceiptRecorderTest {
     }
 
     @Test
-    public void testAddEach() {
+    public void testAddReceipt() {
         assertEquals(receiptRecorder.size(), 0);
         receiptRecorder.addReceipt(50.5,"textbook");
         assertEquals(receiptRecorder.size(), 1);
@@ -24,7 +24,7 @@ public class ReceiptRecorderTest {
     }
 
     @Test
-    public void findReceipt() {
+    public void testFindReceipt() {
         receiptRecorder.addReceipt(50.5,"textbook");
         r1 = receiptRecorder.findReceipt("textbook");
         assertEquals(r1.findAmount(), 50.5);
@@ -37,6 +37,12 @@ public class ReceiptRecorderTest {
         assertEquals(receiptRecorder.size(), 1);
         receiptRecorder.removeReceipt("textbook");
         assertEquals(receiptRecorder.size(), 0);
+    }
+
+    @Test
+    public void testChangeBudget() {
+        double amount = receiptRecorder.changeBudget(1000);
+        assertEquals(amount, 1000);
     }
 
     @Test

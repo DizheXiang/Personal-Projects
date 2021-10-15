@@ -29,13 +29,14 @@ public class ReceiptRecorder {
     public void removeReceipt(String item) {
     }
 
+    // EFFECTS: change the budget amount
+    public double changeBudget(double newAmount) {
+        return budget;
+    }
+
     // EFFECTS: produce the total spending amount
     public double checkExpenses() {
         return 0.00;
-    }
-
-    // EFFECTS: change the budget amount
-    public void changeBudget(double newAmount) {
     }
 
     // EFFECTS: check whether total spending exceeds the budget
