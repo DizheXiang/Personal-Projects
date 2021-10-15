@@ -64,32 +64,23 @@ public class ReceiptRecorderApp {
     }
 
     // EFFECTS: go to different operations based on user's choice
-    @SuppressWarnings("methodlength")
     private void processOperation(String operation) {
         switch (operation) {
-            case "1":
-                createNewReceipt();
+            case "1": createNewReceipt();
                 break;
-            case "2":
-                changeReceipt();
+            case "2": changeReceipt();
                 break;
-            case "3":
-                deleteReceipt();
+            case "3": deleteReceipt();
                 break;
-            case "4":
-                addBudget();
+            case "4": addBudget();
                 break;
-            case "5":
-                changeBudget();
+            case "5": changeBudget();
                 break;
-            case "6":
-                deleteBudget();
+            case "6": deleteBudget();
                 break;
-            case "7":
-                checkExpenses();
+            case "7": checkExpenses();
                 break;
-            case "8":
-                checkBudget();
+            case "8": checkBudget();
                 break;
         }
     }
