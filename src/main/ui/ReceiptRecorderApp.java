@@ -1,7 +1,6 @@
 package ui;
 
-import model.Budget;
-import model.Date;
+import model.Receipt;
 import model.ReceiptRecorder;
 
 import java.util.Scanner;
@@ -10,8 +9,8 @@ import java.util.Scanner;
 public class ReceiptRecorderApp {
 
     private ReceiptRecorder receiptRecorder;
-    private Budget budget;
-    private Date date;
+    private Receipt receipt;
+    private double budget;
     private Scanner input;
     private static final String selectYourOperation =
             "You want to: \n"
@@ -20,10 +19,9 @@ public class ReceiptRecorderApp {
                     + "(3) Delete an existed receipt \n"
                     + "(4) Add a new budget \n"
                     + "(5) Change an existed budget \n"
-                    + "(6) Delete an existed budget \n"
-                    + "(7) See your expenses in a day \n"
-                    + "(8) Check whether exceed your budget \n"
-                    + "(9) Save and quit recorder";
+                    + "(6) See your expenses in a day \n"
+                    + "(7) Check whether exceed your budget \n"
+                    + "(8) Save and quit recorder";
 
 
     // EFFECTS: runs the receipt recorder application
@@ -36,8 +34,7 @@ public class ReceiptRecorderApp {
     // EFFECTS: initializes fields
     private void initial() {
         receiptRecorder = new ReceiptRecorder();
-        date = new Date(1, 1, 2021);
-        budget = new Budget(0.00, date);
+        budget = 0.00;
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -54,7 +51,7 @@ public class ReceiptRecorderApp {
             System.out.println(selectYourOperation);
             operation = input.nextLine();
 
-            if (operation.equals("9")) {
+            if (operation.equals("8")) {
                 keepRunning = false;
             } else {
                 processOperation(operation);
@@ -64,23 +61,30 @@ public class ReceiptRecorderApp {
     }
 
     // EFFECTS: go to different operations based on user's choice
+    @SuppressWarnings("methodlength")
     private void processOperation(String operation) {
         switch (operation) {
-            case "1": createNewReceipt();
+            case "1":
+                createNewReceipt();
                 break;
-            case "2": changeReceipt();
+            case "2":
+                changeReceipt();
                 break;
-            case "3": deleteReceipt();
+            case "3":
+                deleteReceipt();
                 break;
-            case "4": addBudget();
+            case "4":
+                System.out.println("Enter the budget amount");
+                budget = input.nextDouble();
                 break;
-            case "5": changeBudget();
+            case "5":
+                changeBudget();
                 break;
-            case "6": deleteBudget();
+            case "6":
+                checkExpenses();
                 break;
-            case "7": checkExpenses();
-                break;
-            case "8": checkBudget();
+            case "7":
+                checkBudget();
                 break;
         }
     }
@@ -90,23 +94,19 @@ public class ReceiptRecorderApp {
     private void createNewReceipt() {
         System.out.println("Enter your new receipt in $: ");
         double amount = input.nextDouble();
-        System.out.println("What is the date(Month/Day/Year): ");
-        setDate();
         System.out.println("What did you buy: ");
         String item = input.nextLine();
-        receiptRecorder.addReceipt(amount, date, item);
+        receiptRecorder.addReceipt(amount, item);
     }
 
     // MODIFIES: this
     // EFFECTS: change an existed receipt
     private void changeReceipt() {
-        System.out.println("Enter your receipt date(Month/Day/Year): ");
-        setDate();
         System.out.println("Enter what did you buy: ");
         String item = input.nextLine();
-        receiptRecorder.findReceipt(date, item);
+        receipt = receiptRecorder.findReceipt(item);
 
-        System.out.println("What do you want to change? amount/item/date/nothing");
+        System.out.println("What do you want to change? amount/item/nothing");
         while (!input.nextLine().equals("nothing")) {
             makeChangeForReceipt();
         }
@@ -115,56 +115,32 @@ public class ReceiptRecorderApp {
     // MODIFIES: this
     // EFFECTS: delete an existed receipt
     private void deleteReceipt() {
-        System.out.println("Enter the date of receipt you want to delete(Month/Day/Year)");
-        setDate();
         System.out.println("Enter the item of receipt you want to delete");
         String item = input.nextLine();
-        receiptRecorder.findReceipt(date, item);
-        receiptRecorder.removeReceipt();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: create a budget
-    private void addBudget() {
-        System.out.println("Enter your preferred budget amount");
-        String budgetAmount = input.nextLine();
-        System.out.println("Enter the start date of budget(Month/Day/Year)");
-        setDate();
-        budget.addBudget(budgetAmount, date);
+        receiptRecorder.findReceipt(item);
+        receiptRecorder.removeReceipt(item);
     }
 
     // MODIFIES: this
     // EFFECTS: change the budget
     private void changeBudget() {
-        System.out.println("Enter what do you want to change? amount/item/start date/nothing");
-        while (!input.nextLine().equals("nothing")) {
-            makeChangeForBudget();
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: delete the budget
-    private void deleteBudget() {
-        System.out.println("Your budget has been deleted");
-        budget.removeBudget();
+        System.out.println("Enter new amount of budget want to change: ");
+        double newAmount = input.nextDouble();
+        receiptRecorder.changeBudget(newAmount);
     }
 
     // MODIFIES: this
     // EFFECTS: output the total amount of spending in a given time period
     private void checkExpenses() {
-        System.out.println("Enter the start date(Month/Day/Year): ");
-        Date startDate = setDate();
-        System.out.println("Enter the end date(Month/Day/Year): ");
-        Date endDate = setDate();
-        double totalAmount = receiptRecorder.checkExpenses(startDate, endDate);
+        double totalAmount = receiptRecorder.checkExpenses();
         System.out.println("Your total expenses amount is " + totalAmount + " dollars");
     }
 
     // MODIFIES: this
     // EFFECTS: check whether spending exceeds setting budget
     private void checkBudget() {
-        budget.checkBudget();
-        if (budget.checkBudget()) {
+        receiptRecorder.checkBudget();
+        if (receiptRecorder.checkBudget()) {
             System.out.println("Great, your spending doesn't exceed your budget");
         } else {
             System.out.println("Be careful, your spending exceeds your budget");
@@ -176,37 +152,10 @@ public class ReceiptRecorderApp {
     private void makeChangeForReceipt() {
         if (input.nextLine().equals("amount")) {
             double newAmount = input.nextDouble();
-            receiptRecorder.changeAmount(newAmount);
+            receipt.changeAmount(newAmount);
         } else if (input.nextLine().equals("item")) {
             String newItem = input.nextLine();
-            receiptRecorder.changeItem(newItem);
-        } else if (input.nextLine().equals("date")) {
-            setDate();
-            receiptRecorder.changeDate(date);
+            receipt.changeItem(newItem);
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: update the information about budget
-    private void makeChangeForBudget() {
-        if (input.nextLine().equals("amount")) {
-            double newAmount = input.nextDouble();
-            budget.changeAmount(newAmount);
-        } else if (input.nextLine().equals("start date (Month/Day/Year)")) {
-            setDate();
-            budget.changeStartDate(date);
-        }
-    }
-
-    // REQUIRES: this
-    // EFFECTS: create a date by enter int to represent month, day, and year
-    public Date setDate() {
-        System.out.println("Enter the month(Integer): ");
-        int month = input.nextInt();
-        System.out.println("Enter the day(Integer): ");
-        int day = input.nextInt();
-        System.out.println("Enter the year(4-digit Integer): ");
-        int year = input.nextInt();
-        return date = new Date(month, day, year);
     }
 }
