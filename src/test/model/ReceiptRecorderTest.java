@@ -1,7 +1,5 @@
 package model;
 
-import model.Receipt;
-import model.ReceiptRecorder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

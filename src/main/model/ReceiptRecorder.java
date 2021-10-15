@@ -34,13 +34,16 @@ public class ReceiptRecorder {
         return 0.00;
     }
 
+    // EFFECTS: change the budget amount
     public void changeBudget(double newAmount) {
     }
 
+    // EFFECTS: check whether total spending exceeds the budget
     public boolean checkBudget() {
         return false;
     }
 
+    // EFFECTS: produce number of elements inside recorder
     public int size() {
         return receiptRecorder.size();
     }
