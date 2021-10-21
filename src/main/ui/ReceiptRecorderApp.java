@@ -70,7 +70,7 @@ public class ReceiptRecorderApp {
             deleteReceipt();
         } else if (operation.equals("4")) {
             System.out.println("Enter the budget amount");
-            budget = input.nextDouble();
+            budget = Double.parseDouble(input.nextLine());
         } else if (operation.equals("5")) {
             changeBudget();
         } else if (operation.equals("6")) {
@@ -84,7 +84,7 @@ public class ReceiptRecorderApp {
     // EFFECTS: create a new receipt
     private void createNewReceipt() {
         System.out.println("Enter your new receipt in $: ");
-        double amount = input.nextDouble();
+        double amount = Double.parseDouble(input.nextLine());
         System.out.println("What did you buy: ");
         String item = input.nextLine();
         receiptRecorder.addReceipt(amount, item);
@@ -118,7 +118,7 @@ public class ReceiptRecorderApp {
         double currentBudget = receiptRecorder.getBudget();
         System.out.println("Your current amount of budget is " + currentBudget);
         System.out.println("Enter new amount of budget want to change: ");
-        double newAmount = input.nextDouble();
+        double newAmount = Double.parseDouble(input.nextLine());
         receiptRecorder.setBudget(newAmount);
     }
 
@@ -144,7 +144,7 @@ public class ReceiptRecorderApp {
     // EFFECTS: update the information about chosen receipt
     private void makeChangeForReceipt() {
         if (input.nextLine().equals("amount")) {
-            double newAmount = input.nextDouble();
+            double newAmount = Double.parseDouble(input.nextLine());
             receipt.changeAmount(newAmount);
         } else if (input.nextLine().equals("item")) {
             String newItem = input.nextLine();

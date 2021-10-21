@@ -28,8 +28,8 @@ public class ReceiptRecorderTest {
     public void testFindReceipt() {
         receiptRecorder.addReceipt(50.5,"textbook");
         r1 = receiptRecorder.findReceipt("textbook");
-        assertEquals(r1.findAmount(), 50.5);
-        assertEquals(r1.findItem(), "textbook");
+        assertEquals(r1.getAmount(), 50.5);
+        assertEquals(r1.getItem(), "textbook");
     }
 
     @Test

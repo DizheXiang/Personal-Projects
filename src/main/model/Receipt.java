@@ -11,13 +11,13 @@ public class Receipt {
     }
 
     // EFFECTS: produce the amount of receipt
-    public double findAmount() {
+    public double getAmount() {
         return amount;
     }
 
     // EFFECTS: produce the item of receipt
-    public String findItem() {
-        return "";
+    public String getItem() {
+        return item;
     }
 
     // EFFECTS: change the amount of receipt
