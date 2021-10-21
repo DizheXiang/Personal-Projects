@@ -2,14 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
+// Records each receipt and has a budget
 public class ReceiptRecorder {
     private final ArrayList<Receipt> receiptRecorder;
     private double budget;
 
     // EFFECTS: construct a new receipt recorder
     public ReceiptRecorder() {
-        receiptRecorder = new ArrayList();
-        this.budget = 0.0;
+        receiptRecorder = new ArrayList<>();
+        this.budget = 0.00;
     }
 
     // MODIFIED: this
@@ -29,9 +30,15 @@ public class ReceiptRecorder {
     public void removeReceipt(String item) {
     }
 
-    // EFFECTS: change the budget amount
-    public double changeBudget(double newAmount) {
+    // EFFECTS: return the budget amount
+    public double getBudget() {
         return budget;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: set the budget amount
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 
     // EFFECTS: produce the total spending amount

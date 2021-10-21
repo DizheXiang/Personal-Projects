@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// test methods in ReceiptRecorder class
 public class ReceiptRecorderTest {
     ReceiptRecorder receiptRecorder;
     Receipt r1;
@@ -34,15 +35,23 @@ public class ReceiptRecorderTest {
     @Test
     public void testRemoveReceipt() {
         receiptRecorder.addReceipt(50.5,"textbook");
-        assertEquals(receiptRecorder.size(), 1);
+        assertEquals(1, receiptRecorder.size());
         receiptRecorder.removeReceipt("textbook");
-        assertEquals(receiptRecorder.size(), 0);
+        assertEquals(0, receiptRecorder.size());
     }
 
     @Test
-    public void testChangeBudget() {
-        double amount = receiptRecorder.changeBudget(1000);
-        assertEquals(amount, 1000);
+    public void testGetBudget() {
+        assertEquals(0.00, receiptRecorder.getBudget());
+        receiptRecorder.setBudget(1000.00);
+        assertEquals(1000.00, receiptRecorder.getBudget());
+    }
+
+    @Test
+    public void testSetBudget() {
+        receiptRecorder.setBudget(1000.00);
+        double amount = receiptRecorder.getBudget();
+        assertEquals(1000.00, amount);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package model;
 
+// A receipt that contains amount of spending what the user bought
 public class Receipt {
     private double amount;
     private String item;

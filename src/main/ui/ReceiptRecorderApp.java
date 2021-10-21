@@ -61,31 +61,22 @@ public class ReceiptRecorderApp {
     }
 
     // EFFECTS: go to different operations based on user's choice
-    @SuppressWarnings("methodlength")
     private void processOperation(String operation) {
-        switch (operation) {
-            case "1":
-                createNewReceipt();
-                break;
-            case "2":
-                changeReceipt();
-                break;
-            case "3":
-                deleteReceipt();
-                break;
-            case "4":
-                System.out.println("Enter the budget amount");
-                budget = input.nextDouble();
-                break;
-            case "5":
-                changeBudget();
-                break;
-            case "6":
-                checkExpenses();
-                break;
-            case "7":
-                checkBudget();
-                break;
+        if (operation.equals("1")) {
+            createNewReceipt();
+        } else if (operation.equals("2")) {
+            changeReceipt();
+        } else if (operation.equals("3")) {
+            deleteReceipt();
+        } else if (operation.equals("4")) {
+            System.out.println("Enter the budget amount");
+            budget = input.nextDouble();
+        } else if (operation.equals("5")) {
+            changeBudget();
+        } else if (operation.equals("6")) {
+            checkExpenses();
+        } else if (operation.equals("7")) {
+            checkBudget();
         }
     }
 
@@ -124,9 +115,11 @@ public class ReceiptRecorderApp {
     // MODIFIES: this
     // EFFECTS: change the budget
     private void changeBudget() {
+        double currentBudget = receiptRecorder.getBudget();
+        System.out.println("Your current amount of budget is " + currentBudget);
         System.out.println("Enter new amount of budget want to change: ");
         double newAmount = input.nextDouble();
-        receiptRecorder.changeBudget(newAmount);
+        receiptRecorder.setBudget(newAmount);
     }
 
     // MODIFIES: this

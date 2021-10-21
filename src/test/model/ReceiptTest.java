@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// test methods in Receipt class
 public class ReceiptTest {
     Receipt r1;
     Receipt r2;
