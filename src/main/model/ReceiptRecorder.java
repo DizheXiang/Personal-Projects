@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.ReceiptDoesNotExistException;
+
 import java.util.ArrayList;
 
 // Records each receipt and has a budget
@@ -21,12 +23,15 @@ public class ReceiptRecorder {
     }
 
     // EFFECTS: find the receipt with given item
-    public Receipt findReceipt(String item) {
+    public Receipt findReceipt(String item) throws ReceiptDoesNotExistException {
         Receipt trueReceipt = null;
         for (Receipt receipt : receiptRecorder) {
             if (receipt.getItem().equals(item)) {
                 trueReceipt = receipt;
             }
+        }
+        if (trueReceipt == null) {
+            throw new ReceiptDoesNotExistException();
         }
         return trueReceipt;
     }
@@ -49,8 +54,11 @@ public class ReceiptRecorder {
     // MODIFIES: this
     // EFFECTS: remove the receipt with given item
     public void removeReceipt(String item) {
-        Receipt changeObject = findReceipt(item);
-        receiptRecorder.remove(changeObject);
+        try {
+            receiptRecorder.remove(findReceipt(item));
+        } catch (ReceiptDoesNotExistException e) {
+            System.out.println("Sorry, the receipt doesn't exist");
+        }
     }
 
     // MODIFIES: this

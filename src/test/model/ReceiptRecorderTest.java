@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.ReceiptDoesNotExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ public class ReceiptRecorderTest {
     }
 
     @Test
-    public void testFindReceipt() {
+    public void testFindReceipt() throws ReceiptDoesNotExistException {
         receiptRecorder.addReceipt(50.5,"textbook");
         r1 = receiptRecorder.findReceipt("textbook");
         assertEquals(r1.getAmount(), 50.5);

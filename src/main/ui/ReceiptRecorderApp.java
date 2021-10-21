@@ -2,6 +2,7 @@ package ui;
 
 import model.Receipt;
 import model.ReceiptRecorder;
+import model.exceptions.ReceiptDoesNotExistException;
 
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class ReceiptRecorderApp {
                     + "(3) Delete an existed receipt \n"
                     + "(4) Add a new budget \n"
                     + "(5) Change an existed budget \n"
-                    + "(6) See your expenses in a day \n"
+                    + "(6) See your total expenses \n"
                     + "(7) Check whether exceed your budget \n"
                     + "(8) Save and quit recorder";
 
@@ -61,22 +62,31 @@ public class ReceiptRecorderApp {
     }
 
     // EFFECTS: go to different operations based on user's choice
+    @SuppressWarnings("methodlength")
     private void processOperation(String operation) {
-        if (operation.equals("1")) {
-            createNewReceipt();
-        } else if (operation.equals("2")) {
-            changeReceipt();
-        } else if (operation.equals("3")) {
-            deleteReceipt();
-        } else if (operation.equals("4")) {
-            System.out.println("Enter the budget amount");
-            budget = Double.parseDouble(input.nextLine());
-        } else if (operation.equals("5")) {
-            changeBudget();
-        } else if (operation.equals("6")) {
-            checkExpenses();
-        } else if (operation.equals("7")) {
-            checkBudget();
+        switch (operation) {
+            case "1":
+                createNewReceipt();
+                break;
+            case "2":
+                changeReceipt();
+                break;
+            case "3":
+                deleteReceipt();
+                break;
+            case "4":
+                System.out.println("Enter the budget amount");
+                budget = Double.parseDouble(input.nextLine());
+                break;
+            case "5":
+                changeBudget();
+                break;
+            case "6":
+                checkExpenses();
+                break;
+            case "7":
+                checkBudget();
+                break;
         }
     }
 
@@ -95,11 +105,26 @@ public class ReceiptRecorderApp {
     private void changeReceipt() {
         System.out.println("Enter what did you buy: ");
         String item = input.nextLine();
-        receipt = receiptRecorder.findReceipt(item);
+        try {
+            receipt = receiptRecorder.findReceipt(item);
 
-        System.out.println("What do you want to change? amount/item/nothing");
-        while (!input.nextLine().equals("nothing")) {
-            makeChangeForReceipt();
+            System.out.println("What do you want to change? amount/item/nothing");
+            String choice = input.nextLine();
+            if (choice.equals("amount")) {
+                System.out.println("Enter the amount: ");
+                double newAmount = Double.parseDouble(input.nextLine());
+                receipt.changeAmount(newAmount);
+                System.out.println("Change the amount to " + newAmount);
+            } else if (choice.equals("item")) {
+                System.out.println("Enter the item: ");
+                String newItem = input.nextLine();
+                receipt.changeItem(newItem);
+                System.out.println("Change the amount to " + newItem);
+            } else {
+                System.out.println("You have nothing to change");
+            }
+        } catch (ReceiptDoesNotExistException e) {
+            System.out.println("Sorry, the receipt doesn't exist");
         }
     }
 
@@ -108,7 +133,11 @@ public class ReceiptRecorderApp {
     private void deleteReceipt() {
         System.out.println("Enter the item of receipt you want to delete");
         String item = input.nextLine();
-        receiptRecorder.findReceipt(item);
+        try {
+            receiptRecorder.findReceipt(item);
+        } catch (ReceiptDoesNotExistException e) {
+            System.out.println("Sorry, the receipt doesn't exist");
+        }
         receiptRecorder.removeReceipt(item);
     }
 
@@ -134,9 +163,9 @@ public class ReceiptRecorderApp {
     private void checkBudget() {
         receiptRecorder.checkBudget();
         if (receiptRecorder.checkBudget()) {
-            System.out.println("Great, your spending doesn't exceed your budget");
-        } else {
             System.out.println("Be careful, your spending exceeds your budget");
+        } else {
+            System.out.println("Great, your spending doesn't exceed your budget");
         }
     }
 
@@ -146,9 +175,11 @@ public class ReceiptRecorderApp {
         if (input.nextLine().equals("amount")) {
             double newAmount = Double.parseDouble(input.nextLine());
             receipt.changeAmount(newAmount);
+            System.out.println("Change the amount to " + newAmount);
         } else if (input.nextLine().equals("item")) {
             String newItem = input.nextLine();
             receipt.changeItem(newItem);
+            System.out.println("Change the amount to " + newItem);
         }
     }
 }
