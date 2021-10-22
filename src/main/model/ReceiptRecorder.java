@@ -77,4 +77,18 @@ public class ReceiptRecorder {
     public int size() {
         return receiptRecorder.size();
     }
+
+    public void showAllReceipt() {
+        int number = 0;
+        for (Receipt receipt : receiptRecorder) {
+            number++;
+            System.out.println("receipt" + number + ": \n amount "
+                    + receipt.getAmount() + "\n item " + receipt.getItem());
+        }
+        showBudget();
+    }
+
+    public void showBudget() {
+        System.out.println("budget: " +  getBudget() + "\n");
+    }
 }

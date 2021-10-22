@@ -26,9 +26,13 @@ public class ReceiptRecorderTest {
     }
 
     @Test
-    public void testFindReceipt() throws ReceiptDoesNotExistException {
+    public void testFindReceipt() {
         receiptRecorder.addReceipt(50.5,"textbook");
-        r1 = receiptRecorder.findReceipt("textbook");
+        try {
+            r1 = receiptRecorder.findReceipt("textbook");
+        } catch (ReceiptDoesNotExistException e) {
+            System.out.println("Sorry, the receipt doesn't exist");
+        }
         assertEquals(r1.getAmount(), 50.5);
         assertEquals(r1.getItem(), "textbook");
     }
@@ -64,9 +68,9 @@ public class ReceiptRecorderTest {
 
     @Test
     public void testCheckBudget() {
-        assertTrue(receiptRecorder.checkBudget());
-        receiptRecorder.addReceipt(50.5,"textbook");
         assertFalse(receiptRecorder.checkBudget());
+        receiptRecorder.addReceipt(50.5,"textbook");
+        assertTrue(receiptRecorder.checkBudget());
     }
 
     @Test

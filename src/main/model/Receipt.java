@@ -22,9 +22,11 @@ public class Receipt {
 
     // EFFECTS: change the amount of receipt
     public void changeAmount(double newAmount) {
+        amount = newAmount;
     }
 
     // EFFECTS: change the item of receipt
     public void changeItem(String newItem) {
+        item = newItem;
     }
 }
