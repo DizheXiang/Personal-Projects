@@ -18,11 +18,10 @@ public class ReceiptRecorderApp {
                     + "(1) Add a new receipt \n"
                     + "(2) Change an existed receipt \n"
                     + "(3) Delete an existed receipt \n"
-                    + "(4) Add a new budget \n"
-                    + "(5) Change an existed budget \n"
-                    + "(6) See your total expenses \n"
-                    + "(7) Check whether exceed your budget \n"
-                    + "(8) Save and quit recorder";
+                    + "(4) Add a new budget (default: 0.0) \n"
+                    + "(5) See your total expenses \n"
+                    + "(6) Check whether exceed your budget \n"
+                    + "(7) Save and quit recorder";
 
 
     // EFFECTS: runs the receipt recorder application
@@ -52,7 +51,7 @@ public class ReceiptRecorderApp {
             System.out.println(selectYourOperation);
             operation = input.nextLine();
 
-            if (operation.equals("8")) {
+            if (operation.equals("7")) {
                 keepRunning = false;
             } else {
                 processOperation(operation);
@@ -75,16 +74,12 @@ public class ReceiptRecorderApp {
                 deleteReceipt();
                 break;
             case "4":
-                System.out.println("Enter the budget amount");
-                budget = Double.parseDouble(input.nextLine());
-                break;
-            case "5":
                 changeBudget();
                 break;
-            case "6":
+            case "5":
                 checkExpenses();
                 break;
-            case "7":
+            case "6":
                 checkBudget();
                 break;
         }
@@ -171,9 +166,9 @@ public class ReceiptRecorderApp {
     private void checkBudget() {
         receiptRecorder.showAllReceipt();
         if (receiptRecorder.checkBudget()) {
-            System.out.println("Be careful, your spending exceeds your budget");
+            System.out.println("Be careful, your spending exceeds your budget \n");
         } else {
-            System.out.println("Great, your spending doesn't exceed your budget");
+            System.out.println("Great, your spending doesn't exceed your budget \n");
         }
     }
 }
