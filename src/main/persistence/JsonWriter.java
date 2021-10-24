@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-// citation: adjust from JsonSerializationDemo
+// citation URL: https://github.com/stleary/JSON-java.git
 // Represents a writer that writes JSON representation of JsonWriter to file
 public class JsonWriter {
     private static final int TAB = 4;

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 
-// citation: adjust from JsonSerializationDemo
+// citation URL: https://github.com/stleary/JSON-java.git
 // Represents a reader that reads receiptRecorder from JSON data stored in file
 public class JsonReader {
     private String source;

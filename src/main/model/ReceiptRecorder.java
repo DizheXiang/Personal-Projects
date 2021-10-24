@@ -113,4 +113,8 @@ public class ReceiptRecorder implements Writable {
 
         return jsonArray;
     }
+
+    public ArrayList<Receipt> receipts() {
+        return receiptRecorder;
+    }
 }
