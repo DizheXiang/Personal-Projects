@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // A receipt that contains amount of spending what the user bought
-public class Receipt {
+public class Receipt implements Writable {
     private double amount;
     private String item;
 
@@ -28,5 +31,13 @@ public class Receipt {
     // EFFECTS: change the item of receipt
     public void changeItem(String newItem) {
         item = newItem;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("item", item);
+        return json;
     }
 }

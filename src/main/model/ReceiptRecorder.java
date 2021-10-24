@@ -1,11 +1,14 @@
 package model;
 
 import model.exceptions.ReceiptDoesNotExistException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 
 // Records each receipt and has a budget
-public class ReceiptRecorder {
+public class ReceiptRecorder implements Writable {
     private final ArrayList<Receipt> receiptRecorder;
     private double budget;
 
@@ -90,5 +93,24 @@ public class ReceiptRecorder {
 
     public void showBudget() {
         System.out.println("budget: " +  getBudget() + "\n");
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("budget", budget);
+        json.put("receipts", receiptsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this receiptRecorder as a JSON array
+    private JSONArray receiptsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Receipt r : receiptRecorder) {
+            jsonArray.put(r.toJson());
+        }
+
+        return jsonArray;
     }
 }

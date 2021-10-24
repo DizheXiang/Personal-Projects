@@ -12,6 +12,7 @@ import org.json.*;
 
 
 // citation: adjust from JsonSerializationDemo
+// Represents a reader that reads receiptRecorder from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -32,8 +33,8 @@ public class JsonReader {
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines( Paths.get(source), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s));
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(contentBuilder::append);
         }
 
         return contentBuilder.toString();
