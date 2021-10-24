@@ -34,7 +34,7 @@ public class JsonReader {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
-            stream.forEach(contentBuilder::append);
+            stream.forEach(s -> contentBuilder.append(s));
         }
 
         return contentBuilder.toString();
@@ -44,7 +44,7 @@ public class JsonReader {
     private ReceiptRecorder parseReceiptRecorder(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         ReceiptRecorder receiptRecorder = new ReceiptRecorder(name);
-        double budget = Double.parseDouble(jsonObject.getString("budget"));
+        double budget = jsonObject.getDouble("budget");
         receiptRecorder.setBudget(budget);
         addReceipts(receiptRecorder, jsonObject);
         return receiptRecorder;
@@ -63,7 +63,7 @@ public class JsonReader {
     // MODIFIES: receiptRecorder
     // EFFECTS: parses thingy from JSON object and adds it to receiptRecorder
     private void addReceipt(ReceiptRecorder receiptRecorder, JSONObject jsonObject) {
-        double amount = Double.parseDouble(jsonObject.getString("amount"));
+        double amount = jsonObject.getDouble("amount");
         String item = jsonObject.getString("item");
         receiptRecorder.addReceipt(amount, item);
     }

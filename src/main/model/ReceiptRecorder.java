@@ -110,6 +110,7 @@ public class ReceiptRecorder implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("name", name);
         json.put("budget", budget);
         json.put("receipts", receiptsToJson());
         return json;

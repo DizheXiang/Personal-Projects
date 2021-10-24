@@ -1,0 +1,14 @@
+{
+    "receipts": [
+        {
+            "amount": 10,
+            "item": "lunch"
+        },
+        {
+            "amount": 50,
+            "item": "book"
+        }
+    ],
+    "name": "My receipt recorder",
+    "budget": 500
+}

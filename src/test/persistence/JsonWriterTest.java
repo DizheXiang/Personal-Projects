@@ -61,7 +61,7 @@ public class JsonWriterTest extends JsonTest{
             assertEquals(2, receipts.size());
             checkReceipts(10,"lunch", receipts.get(0));
             checkReceipts(50.0,"book", receipts.get(1));
-            checkBudget(500,receiptRecorder);
+            assertEquals(500, receiptRecorder.getBudget());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
