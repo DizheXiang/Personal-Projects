@@ -9,26 +9,38 @@ import java.util.ArrayList;
 
 // Records each receipt and has a budget
 public class ReceiptRecorder implements Writable {
-    private final ArrayList<Receipt> receiptRecorder;
+    private ArrayList<Receipt> receipts;
+    private String name;
     private double budget;
 
     // EFFECTS: construct a new receipt recorder
-    public ReceiptRecorder() {
-        receiptRecorder = new ArrayList<>();
+    public ReceiptRecorder(String name) {
+        receipts = new ArrayList<>();
         this.budget = 0.00;
+        this.name = name;
+    }
+
+    //EFFECTS: return the name of receipt recorder
+    public String getName() {
+        return name;
+    }
+
+    //EFFECTS: return the receipts inside receipt recorder
+    public ArrayList<Receipt> getReceipts() {
+        return receipts;
     }
 
     // MODIFIED: this
     // EFFECTS: add a receipt to the receipt recorder
     public void addReceipt(double amount, String item) {
         Receipt receipt = new Receipt(amount, item);
-        receiptRecorder.add(receipt);
+        receipts.add(receipt);
     }
 
     // EFFECTS: find the receipt with given item
     public Receipt findReceipt(String item) throws ReceiptDoesNotExistException {
         Receipt trueReceipt = null;
-        for (Receipt receipt : receiptRecorder) {
+        for (Receipt receipt : receipts) {
             if (receipt.getItem().equals(item)) {
                 trueReceipt = receipt;
             }
@@ -42,7 +54,7 @@ public class ReceiptRecorder implements Writable {
     // EFFECTS: produce the total spending amount
     public double checkExpenses() {
         double totalAmount = 0.00;
-        for (Receipt receipt : receiptRecorder) {
+        for (Receipt receipt : receipts) {
             totalAmount += receipt.getAmount();
         }
         return totalAmount;
@@ -58,7 +70,7 @@ public class ReceiptRecorder implements Writable {
     // EFFECTS: remove the receipt with given item
     public void removeReceipt(String item) {
         try {
-            receiptRecorder.remove(findReceipt(item));
+            receipts.remove(findReceipt(item));
         } catch (ReceiptDoesNotExistException e) {
             System.out.println("Sorry, the receipt doesn't exist");
         }
@@ -78,12 +90,12 @@ public class ReceiptRecorder implements Writable {
 
     // EFFECTS: return the size of receiptRecorder
     public int size() {
-        return receiptRecorder.size();
+        return receipts.size();
     }
 
     public void showAllReceipt() {
         int number = 0;
-        for (Receipt receipt : receiptRecorder) {
+        for (Receipt receipt : receipts) {
             number++;
             System.out.println("receipt" + number + ": \n amount "
                     + receipt.getAmount() + "\n item " + receipt.getItem());
@@ -107,14 +119,12 @@ public class ReceiptRecorder implements Writable {
     private JSONArray receiptsToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Receipt r : receiptRecorder) {
+        for (Receipt r : receipts) {
             jsonArray.put(r.toJson());
         }
 
         return jsonArray;
     }
 
-    public ArrayList<Receipt> receipts() {
-        return receiptRecorder;
-    }
+
 }

@@ -42,7 +42,10 @@ public class JsonReader {
 
     // EFFECTS: parses receiptRecorder from JSON object and returns it
     private ReceiptRecorder parseReceiptRecorder(JSONObject jsonObject) {
-        ReceiptRecorder receiptRecorder = new ReceiptRecorder();
+        String name = jsonObject.getString("name");
+        ReceiptRecorder receiptRecorder = new ReceiptRecorder(name);
+        double budget = Double.parseDouble(jsonObject.getString("budget"));
+        receiptRecorder.setBudget(budget);
         addReceipts(receiptRecorder, jsonObject);
         return receiptRecorder;
     }
@@ -60,10 +63,8 @@ public class JsonReader {
     // MODIFIES: receiptRecorder
     // EFFECTS: parses thingy from JSON object and adds it to receiptRecorder
     private void addReceipt(ReceiptRecorder receiptRecorder, JSONObject jsonObject) {
-        String item = jsonObject.getString("name");
         double amount = Double.parseDouble(jsonObject.getString("amount"));
-        double budget = Double.parseDouble(jsonObject.getString("budget"));
-        receiptRecorder.setBudget(budget);
+        String item = jsonObject.getString("item");
         receiptRecorder.addReceipt(amount, item);
     }
 

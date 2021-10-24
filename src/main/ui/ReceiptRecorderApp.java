@@ -33,7 +33,7 @@ public class ReceiptRecorderApp {
     // MODIFIES: this
     // EFFECTS: initializes fields
     private void initial() {
-        receiptRecorder = new ReceiptRecorder();
+        receiptRecorder = new ReceiptRecorder("My receipt recorder");
         budget = 0.00;
         input = new Scanner(System.in);
         input.useDelimiter("\n");

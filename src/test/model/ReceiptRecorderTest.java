@@ -13,7 +13,7 @@ public class ReceiptRecorderTest {
 
     @BeforeEach
     public void runBefore() {
-        receiptRecorder = new ReceiptRecorder();
+        receiptRecorder = new ReceiptRecorder("My receipt recorder");
     }
 
     @Test
