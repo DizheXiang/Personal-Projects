@@ -173,7 +173,7 @@ public class ReceiptRecorderApp {
     private void checkExpenses() {
         double totalAmount = receiptRecorder.checkExpenses();
         System.out.println(receiptRecorder.showAllReceipt());
-        System.out.println("Your total expenses amount is " + totalAmount + " dollars");
+        System.out.println("Your total expenses amount is " + totalAmount + " dollars \n");
     }
 
     // MODIFIES: this
