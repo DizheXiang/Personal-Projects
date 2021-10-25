@@ -89,14 +89,16 @@ public class ReceiptRecorder implements Writable {
         return receipts.size();
     }
 
-    public void showAllReceipt() {
+    public String showAllReceipt() {
         int number = 0;
+        String outputReceipt = "";
         for (Receipt receipt : receipts) {
             number++;
-            System.out.println("receipt" + number + ": \n amount "
+            outputReceipt +=  ("\n receipt" + number + ": \n amount "
                     + receipt.getAmount() + "\n item " + receipt.getItem());
         }
-        System.out.println("\n budget: " + getBudget() + "\n");
+        outputReceipt +=  "\n budget: " + getBudget() + "\n";
+        return outputReceipt;
     }
 
     @Override

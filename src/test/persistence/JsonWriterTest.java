@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// citation URL: https://github.com/stleary/JSON-java.git
 public class JsonWriterTest extends JsonTest{
     @Test
     void testWriterInvalidFile() {

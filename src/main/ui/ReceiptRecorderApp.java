@@ -108,7 +108,7 @@ public class ReceiptRecorderApp {
         System.out.println("Enter the name of item you bought: ");
         String item = input.nextLine();
         receiptRecorder.addReceipt(amount, item);
-        receiptRecorder.showAllReceipt();
+        System.out.println(receiptRecorder.showAllReceipt());
     }
 
     // MODIFIES: this
@@ -138,7 +138,7 @@ public class ReceiptRecorderApp {
         } catch (ReceiptDoesNotExistException e) {
             System.out.println("Sorry, the receipt doesn't exist");
         } finally {
-            receiptRecorder.showAllReceipt();
+            System.out.println(receiptRecorder.showAllReceipt());
         }
     }
 
@@ -153,7 +153,7 @@ public class ReceiptRecorderApp {
         } catch (ReceiptDoesNotExistException e) {
             System.out.println("Sorry, the receipt doesn't exist");
         } finally {
-            receiptRecorder.showAllReceipt();
+            System.out.println(receiptRecorder.showAllReceipt());
         }
     }
 
@@ -165,21 +165,21 @@ public class ReceiptRecorderApp {
         System.out.println("Enter new amount of budget want to change: ");
         double newAmount = Double.parseDouble(input.nextLine());
         receiptRecorder.setBudget(newAmount);
-        receiptRecorder.showAllReceipt();
+        System.out.println(receiptRecorder.showAllReceipt());
     }
 
     // MODIFIES: this
     // EFFECTS: output the total amount of spending in a given time period
     private void checkExpenses() {
         double totalAmount = receiptRecorder.checkExpenses();
-        receiptRecorder.showAllReceipt();
+        System.out.println(receiptRecorder.showAllReceipt());
         System.out.println("Your total expenses amount is " + totalAmount + " dollars");
     }
 
     // MODIFIES: this
     // EFFECTS: check whether spending exceeds setting budget
     private void checkBudget() {
-        receiptRecorder.showAllReceipt();
+        System.out.println(receiptRecorder.showAllReceipt());
         if (receiptRecorder.checkBudget()) {
             System.out.println("Be careful, your spending exceeds your budget \n");
         } else {
@@ -187,6 +187,7 @@ public class ReceiptRecorderApp {
         }
     }
 
+    // citation URL: https://github.com/stleary/JSON-java.git
     // EFFECTS: saves the receiptRecorder to file
     private void saveReceiptRecorder() {
         try {
@@ -199,6 +200,7 @@ public class ReceiptRecorderApp {
         }
     }
 
+    // citation URL: https://github.com/stleary/JSON-java.git
     // MODIFIES: this
     // EFFECTS: loads receiptRecorder from file
     private void loadReceiptRecorder() {
