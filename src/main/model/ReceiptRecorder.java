@@ -68,12 +68,8 @@ public class ReceiptRecorder implements Writable {
 
     // MODIFIES: this
     // EFFECTS: remove the receipt with given item
-    public void removeReceipt(String item) {
-        try {
-            receipts.remove(findReceipt(item));
-        } catch (ReceiptDoesNotExistException e) {
-            System.out.println("Sorry, the receipt doesn't exist");
-        }
+    public void removeReceipt(String item) throws ReceiptDoesNotExistException {
+        receipts.remove(findReceipt(item));
     }
 
     // MODIFIES: this
@@ -100,11 +96,7 @@ public class ReceiptRecorder implements Writable {
             System.out.println("receipt" + number + ": \n amount "
                     + receipt.getAmount() + "\n item " + receipt.getItem());
         }
-        showBudget();
-    }
-
-    public void showBudget() {
-        System.out.println("budget: " +  getBudget() + "\n");
+        System.out.println("\n budget: " + getBudget() + "\n");
     }
 
     @Override

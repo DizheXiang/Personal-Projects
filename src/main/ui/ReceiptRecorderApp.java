@@ -134,12 +134,12 @@ public class ReceiptRecorderApp {
         String item = input.nextLine();
         try {
             receiptRecorder.findReceipt(item);
+            receiptRecorder.removeReceipt(item);
         } catch (ReceiptDoesNotExistException e) {
             System.out.println("Sorry, the receipt doesn't exist");
         } finally {
             receiptRecorder.showAllReceipt();
         }
-        receiptRecorder.removeReceipt(item);
     }
 
     // MODIFIES: this
@@ -150,7 +150,7 @@ public class ReceiptRecorderApp {
         System.out.println("Enter new amount of budget want to change: ");
         double newAmount = Double.parseDouble(input.nextLine());
         receiptRecorder.setBudget(newAmount);
-        receiptRecorder.showBudget();
+        receiptRecorder.showAllReceipt();
     }
 
     // MODIFIES: this
