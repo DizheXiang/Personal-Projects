@@ -4,15 +4,24 @@ import model.Receipt;
 import model.ReceiptRecorder;
 import model.exceptions.ReceiptDoesNotExistException;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.util.Scanner;
 
 // Receipt recorder application
 public class ReceiptRecorderApp {
 
     private ReceiptRecorder receiptRecorder;
+    private static final String JSON_STORE = "./data/receiptRecorder.json";
     private Receipt receipt;
     private double budget;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private static final String selectYourOperation =
             "You want to: \n"
                     + "(1) Add a new receipt \n"
@@ -25,7 +34,13 @@ public class ReceiptRecorderApp {
 
 
     // EFFECTS: runs the receipt recorder application
-    public ReceiptRecorderApp() {
+    public ReceiptRecorderApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
+
         runReceiptRecorder();
     }
 
@@ -35,8 +50,6 @@ public class ReceiptRecorderApp {
     private void initial() {
         receiptRecorder = new ReceiptRecorder("My receipt recorder");
         budget = 0.00;
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
     }
 
     // MODIFIES: this
@@ -46,12 +59,14 @@ public class ReceiptRecorderApp {
         String operation;
 
         initial();
+        loadReceiptRecorder();
 
         while (keepRunning) {
             System.out.println(selectYourOperation);
             operation = input.nextLine();
 
             if (operation.equals("7")) {
+                saveReceiptRecorder();
                 keepRunning = false;
             } else {
                 processOperation(operation);
@@ -169,6 +184,29 @@ public class ReceiptRecorderApp {
             System.out.println("Be careful, your spending exceeds your budget \n");
         } else {
             System.out.println("Great, your spending doesn't exceed your budget \n");
+        }
+    }
+
+    // EFFECTS: saves the receiptRecorder to file
+    private void saveReceiptRecorder() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(receiptRecorder);
+            jsonWriter.close();
+            System.out.println("Saved " + receiptRecorder.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads receiptRecorder from file
+    private void loadReceiptRecorder() {
+        try {
+            receiptRecorder = jsonReader.read();
+            System.out.println("Loaded " + receiptRecorder.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
