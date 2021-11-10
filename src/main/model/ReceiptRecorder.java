@@ -4,6 +4,7 @@ import model.exceptions.ReceiptDoesNotExistException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
+import ui.gui.ReceiptTable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -130,6 +131,7 @@ public class ReceiptRecorder implements Writable {
             JOptionPane.showMessageDialog(null,
                     "Invalid index");
         }
+        receipts.remove(receipt);
     }
 
     public Receipt findReceiptByIndex(int itemIndex) {

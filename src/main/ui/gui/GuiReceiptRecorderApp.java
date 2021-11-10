@@ -9,10 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class GuiReceiptRecorderApp implements ActionListener {
+public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     private static final int frameHeight = 300;
     private static final int frameWidth = 475;
-    private JFrame frame;
     private ReceiptTable receiptTable;
     private ReceiptRecorder receiptRecorder;
     private JsonReader jsonReader;
@@ -20,9 +19,9 @@ public class GuiReceiptRecorderApp implements ActionListener {
 
     @SuppressWarnings("methodlength")
     public GuiReceiptRecorderApp() {
-        frame = new JFrame("Receipt Recorder");
-        frame.setSize(frameWidth, frameHeight);
-        frame.setLayout(new BorderLayout());
+        super("Receipt Recorder");
+        setSize(frameWidth, frameHeight);
+        setLayout(new BorderLayout());
         jsonReader = new JsonReader(JSON_STORE);
         receiptRecorder = new ReceiptRecorder("My receipt recorder");
 
@@ -32,17 +31,17 @@ public class GuiReceiptRecorderApp implements ActionListener {
         JButton button2 = new JButton("Load previous receipt");
         JButton button3 = new JButton("Save and quit app");
 
-        frame.add(button1, BorderLayout.WEST);
+        add(button1, BorderLayout.WEST);
         button1.setEnabled(true);
         button1.addActionListener(this);
-        frame.add(button2, BorderLayout.CENTER);
+        add(button2, BorderLayout.CENTER);
         button2.setEnabled(true);
         button2.addActionListener(this);
-        frame.add(button3, BorderLayout.EAST);
+        add(button3, BorderLayout.EAST);
         button3.setEnabled(true);
         button3.addActionListener(this);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     @Override
@@ -62,7 +61,7 @@ public class GuiReceiptRecorderApp implements ActionListener {
                 break;
             case "Save and quit app":
                 receiptTable.dispose();
-                frame.dispose();
+                dispose();
                 break;
         }
     }
