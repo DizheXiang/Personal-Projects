@@ -16,6 +16,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
     private final JTable table;
     private JLabel label1;
     private JLabel label2;
+    private JLabel label3;
     private final Box buttonBox;
 
     private static final String JSON_STORE = "./data/receiptRecorder.json";
@@ -24,8 +25,8 @@ public class ReceiptTable extends JFrame implements ActionListener {
     private final ReceiptRecorder receiptRecorder;
     private double budget;
     private static final String ADD_RECEIPT = "Add a new receipt";
-    private static final String CHANGE_RECEIPT = "Change the receipt";
-    private static final String DELETE_RECEIPT = "Delete a receipt";
+    private static final String CHANGE_RECEIPT = "Change the receipt (click on the row)";
+    private static final String DELETE_RECEIPT = "Delete a receipt (click on the row)";
     private static final String CHANGE_BUDGET = "Change the budget";
 
 
@@ -61,12 +62,13 @@ public class ReceiptTable extends JFrame implements ActionListener {
     }
 
     private void generateLabel() {
-        label1 = new JLabel("\nYour total expense is " + budget);
+        label1 = new JLabel("\nYour total expense is " + receiptRecorder.checkExpenses());
         if (receiptRecorder.checkBudget()) {
             label2 = new JLabel("\nBe careful, your spending exceeds your budget");
         } else {
             label2 = new JLabel("\nGreat, your spending doesn't exceed your budget");
         }
+        label3 = new JLabel("\nYour budget is " + receiptRecorder.getBudget());
     }
 
     private void setButtons() {
@@ -87,6 +89,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
         changeBudgetButton.addActionListener(this);
 
         buttonBox.add(label1);
+        buttonBox.add(label3);
         buttonBox.add(label2);
 
     }
@@ -108,46 +111,41 @@ public class ReceiptTable extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
 
-        if (action.equals(ADD_RECEIPT)) {
-            new AddReceipt(this, receiptRecorder);
-        } else if (action.equals(CHANGE_RECEIPT)) {
-            int selectedRowIndex = table.getSelectedRow();
-            if (selectedRowIndex == -1) {
-                JOptionPane.showMessageDialog(null,
-                        "Please select a receipt to delete");
-                return;
+        switch (action) {
+            case ADD_RECEIPT:
+                new AddReceipt(this, receiptRecorder);
+                break;
+            case CHANGE_RECEIPT: {
+                int selectedRowIndex = table.getSelectedRow();
+                if (selectedRowIndex == -1) {
+                    JOptionPane.showMessageDialog(null,
+                            "Please select a receipt to delete");
+                    return;
+                }
+                new ChangeReceiptItem(this, receiptRecorder, selectedRowIndex);
+                table.setValueAt((Object)
+                                receiptRecorder.findReceiptByIndex(selectedRowIndex).getItem(),
+                        selectedRowIndex, 2);
+                table.setValueAt((Object)
+                                receiptRecorder.findReceiptByIndex(selectedRowIndex).getAmount(),
+                        selectedRowIndex, 3);
+                save();
+                break;
             }
-            new ChangeReceiptItem(this, receiptRecorder, selectedRowIndex);
-            table.setValueAt((Object)
-                    receiptRecorder.findReceiptByIndex(selectedRowIndex).getItem(),
-                    selectedRowIndex, 2);
-            table.setValueAt((Object)
-                            receiptRecorder.findReceiptByIndex(selectedRowIndex).getAmount(),
-                    selectedRowIndex, 3);
-            save();
-        }  else if (action.equals(DELETE_RECEIPT)) {
-            int selectedRowIndex = table.getSelectedRow();
-            if (selectedRowIndex == -1) {
-                JOptionPane.showMessageDialog(null,
-                        "Please select a receipt to delete");
+            case DELETE_RECEIPT: {
+                int selectedRowIndex = table.getSelectedRow();
+                if (selectedRowIndex == -1) {
+                    JOptionPane.showMessageDialog(null,
+                            "Please select a receipt to delete");
+                }
+                receiptRecorder.removeReceiptByIndex(selectedRowIndex);
+                tableModel.removeRow(selectedRowIndex);
+                save();
+                break;
             }
-            receiptRecorder.removeReceiptByIndex(selectedRowIndex);
-            save();
-        } else if (e.getActionCommand().equals(CHANGE_BUDGET)) {
-            JFrame jf = new JFrame("Budget");
-            JPanel jp = new JPanel();
-            jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            jf.setSize(300,200);
-            jf.add(jp);
-            JLabel itemNameLabel = new JLabel("Enter new budget: ");
-            itemNameLabel.setBounds(50, 20, 200, 20);
-            jp.add(itemNameLabel);
-
-            JTextField newBudget = new JTextField(20);
-            newBudget.setBounds(50, 40, 200, 20);
-            jp.add(newBudget);
-
-            budget = Double.parseDouble(newBudget.getText());
+            case CHANGE_BUDGET:
+                new EditBudget(this, receiptRecorder);
+                break;
         }
     }
 

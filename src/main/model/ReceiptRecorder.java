@@ -4,7 +4,6 @@ import model.exceptions.ReceiptDoesNotExistException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import ui.gui.ReceiptTable;
 
 import javax.swing.*;
 import java.util.ArrayList;
