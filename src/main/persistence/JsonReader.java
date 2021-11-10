@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
+import javax.swing.*;
+
 
 // citation URL: https://github.com/stleary/JSON-java.git
 // Represents a reader that reads receiptRecorder from JSON data stored in file
@@ -67,5 +69,4 @@ public class JsonReader {
         String item = jsonObject.getString("item");
         receiptRecorder.addReceipt(amount, item);
     }
-
 }

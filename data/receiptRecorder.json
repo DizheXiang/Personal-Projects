@@ -1,5 +1,18 @@
 {
-    "receipts": [],
+    "receipts": [
+        {
+            "amount": 100,
+            "item": "A"
+        },
+        {
+            "amount": 150,
+            "item": "B"
+        },
+        {
+            "amount": 200,
+            "item": "C"
+        }
+    ],
     "name": "My receipt recorder",
     "budget": 0
 }

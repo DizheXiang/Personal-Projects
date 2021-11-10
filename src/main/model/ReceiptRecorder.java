@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 // Records each receipt and has a budget
@@ -94,10 +95,10 @@ public class ReceiptRecorder implements Writable {
         String outputReceipt = "";
         for (Receipt receipt : receipts) {
             number++;
-            outputReceipt +=  ("\n receipt" + number + ": \n amount "
+            outputReceipt += ("\n receipt" + number + ": \n amount "
                     + receipt.getAmount() + "\n item " + receipt.getItem());
         }
-        outputReceipt +=  "\n budget: " + getBudget() + "\n";
+        outputReceipt += "\n budget: " + getBudget() + "\n";
         return outputReceipt;
     }
 
@@ -122,4 +123,20 @@ public class ReceiptRecorder implements Writable {
     }
 
 
+    public void removeReceiptByIndex(int itemIndex) {
+        Receipt receipt = null;
+        receipt = findReceiptByIndex(itemIndex);
+        if (receipt == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Invalid index");
+        }
+    }
+
+    public Receipt findReceiptByIndex(int itemIndex) {
+        Receipt receipt = null;
+        if (itemIndex >= 0 && itemIndex < receipts.size()) {
+            receipt = receipts.get(itemIndex);
+        }
+        return receipt;
+    }
 }

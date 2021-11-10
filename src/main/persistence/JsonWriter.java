@@ -3,6 +3,7 @@ package persistence;
 import model.ReceiptRecorder;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -44,4 +45,6 @@ public class JsonWriter {
     private void saveToFile(String json) {
         writer.print(json);
     }
+
+
 }
