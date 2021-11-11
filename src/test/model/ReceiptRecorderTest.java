@@ -117,8 +117,10 @@ public class ReceiptRecorderTest {
     public void testFindReceiptByIndex() {
         assertNull(receiptRecorder.findReceiptByIndex(0));
         receiptRecorder.addReceipt(10, "A");
+        assertNull(receiptRecorder.findReceiptByIndex(-1));
         assertEquals(receiptRecorder.getReceipts().get(0), receiptRecorder.findReceiptByIndex(0));
-        assertNull(receiptRecorder.findReceiptByIndex(1));
+        int indexNum = receiptRecorder.getReceipts().size() - 1 + 1;
+        assertNull(receiptRecorder.findReceiptByIndex(indexNum));
     }
 
     @Test
