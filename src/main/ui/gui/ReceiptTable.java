@@ -119,7 +119,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
                 int selectedRowIndex = table.getSelectedRow();
                 if (selectedRowIndex == -1) {
                     JOptionPane.showMessageDialog(null,
-                            "Please select a receipt to delete");
+                            "Please select a receipt to change");
                     return;
                 }
                 new ChangeReceiptItem(this, receiptRecorder, selectedRowIndex);

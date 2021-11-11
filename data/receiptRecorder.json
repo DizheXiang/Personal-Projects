@@ -1,7 +1,7 @@
 {
     "receipts": [{
-        "amount": 50,
-        "item": "B"
+        "amount": 10,
+        "item": "A"
     }],
     "name": "My receipt recorder",
     "budget": 60

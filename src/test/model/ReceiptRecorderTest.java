@@ -74,16 +74,16 @@ public class ReceiptRecorderTest {
 
     @Test
     public void testShowAllReceipt() {
-        receiptRecorder.showAllReceipt().equals(""
-                + "\n budget: " + receiptRecorder.getBudget() + "\n");
+        assertEquals(receiptRecorder.showAllReceipt(),
+                "" + "\n budget: " + receiptRecorder.getBudget() + "\n");
         receiptRecorder.addReceipt(100, "A");
-        receiptRecorder.showAllReceipt().equals(""
-                + "\n receipt" + 1 + ": \n amount "
-                + 100 + "\n item " + "A"
-                + "\n budget: " + receiptRecorder.getBudget() + "\n");
+        assertEquals(receiptRecorder.showAllReceipt(), ""
+                        + "\n receipt" + 1 + ": \n amount "
+                        + 100 + "\n item " + "A"
+                        + "\n budget: " + receiptRecorder.getBudget() + "\n");
         receiptRecorder.addReceipt(20, "B");
         receiptRecorder.setBudget(500);
-        receiptRecorder.showAllReceipt().equals(""
+        assertEquals(receiptRecorder.showAllReceipt(), ""
                 + "\n receipt" + 1 + ": \n amount "
                 + 100 + "\n item " + "A"
                 + "\n receipt" + 2 + ": \n amount "
@@ -113,4 +113,21 @@ public class ReceiptRecorderTest {
         assertTrue(receiptRecorder.checkBudget());
     }
 
+    @Test
+    public void testFindReceiptByIndex() {
+        assertNull(receiptRecorder.findReceiptByIndex(0));
+        receiptRecorder.addReceipt(10, "A");
+        assertEquals(receiptRecorder.getReceipts().get(0), receiptRecorder.findReceiptByIndex(0));
+        assertNull(receiptRecorder.findReceiptByIndex(1));
+    }
+
+    @Test
+    public void testRemoveReceiptByIndex() {
+        assertNull(receiptRecorder.findReceiptByIndex(0));
+        receiptRecorder.addReceipt(10, "A");
+        assertEquals(receiptRecorder.getReceipts().get(0), receiptRecorder.findReceiptByIndex(0));
+        assertNull(receiptRecorder.findReceiptByIndex(1));
+        receiptRecorder.removeReceiptByIndex(0);
+        assertNull(receiptRecorder.findReceiptByIndex(0));
+    }
 }
