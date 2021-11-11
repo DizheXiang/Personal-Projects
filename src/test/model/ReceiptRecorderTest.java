@@ -79,15 +79,15 @@ public class ReceiptRecorderTest {
         receiptRecorder.addReceipt(100, "A");
         assertEquals(receiptRecorder.showAllReceipt(), ""
                         + "\n receipt" + 1 + ": \n amount "
-                        + 100 + "\n item " + "A"
+                        + 100.0 + "\n item " + "A"
                         + "\n budget: " + receiptRecorder.getBudget() + "\n");
         receiptRecorder.addReceipt(20, "B");
         receiptRecorder.setBudget(500);
         assertEquals(receiptRecorder.showAllReceipt(), ""
                 + "\n receipt" + 1 + ": \n amount "
-                + 100 + "\n item " + "A"
+                + 100.0 + "\n item " + "A"
                 + "\n receipt" + 2 + ": \n amount "
-                + 20 + "\n item " + "B"
+                + 20.0 + "\n item " + "B"
                 + "\n budget: " + receiptRecorder.getBudget() + "\n");
     }
 
