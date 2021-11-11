@@ -70,22 +70,10 @@ public class ChangeReceiptItem extends JFrame implements ActionListener {
             receipt.changeItem(item);
             receipt.changeAmount(amount);
 
+            receiptTable.save();
             receiptTable.dispose();
             new ReceiptTable(receiptRecorder);
             dispose();
-        }
-    }
-
-    public void save() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(receiptRecorder);
-            jsonWriter.close();
-            JOptionPane.showMessageDialog(null,
-                    "Data saved");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Unable to save data");
         }
     }
 }

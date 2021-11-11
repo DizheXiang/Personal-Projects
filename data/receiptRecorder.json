@@ -1,14 +1,8 @@
 {
-    "receipts": [
-        {
-            "amount": 50,
-            "item": "B"
-        },
-        {
-            "amount": 200,
-            "item": "C"
-        }
-    ],
+    "receipts": [{
+        "amount": 50,
+        "item": "B"
+    }],
     "name": "My receipt recorder",
-    "budget": 250
+    "budget": 60
 }

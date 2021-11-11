@@ -54,23 +54,10 @@ public class EditBudget extends JFrame implements ActionListener {
             double  budget = Double.parseDouble(newBudget.getText());
             receiptRecorder.setBudget(budget);
 
-            save();
+            receiptTable.save();
             receiptTable.dispose();
             new ReceiptTable(receiptRecorder);
             dispose();
-        }
-    }
-
-    public void save() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(receiptRecorder);
-            jsonWriter.close();
-            JOptionPane.showMessageDialog(null,
-                    "Data saved");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Unable to save data");
         }
     }
 }

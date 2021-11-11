@@ -60,6 +60,8 @@ public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
                         null, "Your receipt record has been loaded");
                 break;
             case "Save and quit app":
+                JOptionPane.showMessageDialog(
+                        null, "Goodbye, have a nice day ✧*٩(ˊᗜˋ*)و✧*");
                 receiptTable.dispose();
                 dispose();
                 break;
@@ -72,11 +74,10 @@ public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
         try {
             this.receiptRecorder = jsonReader.read();
             JOptionPane.showMessageDialog(null,
-                    "Data loaded");
+                    "Data loaded \nStart to record your receipts ＾▽＾");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
                     "Unable to load data");
         }
     }
-
 }

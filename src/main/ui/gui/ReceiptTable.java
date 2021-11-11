@@ -123,13 +123,10 @@ public class ReceiptTable extends JFrame implements ActionListener {
                     return;
                 }
                 new ChangeReceiptItem(this, receiptRecorder, selectedRowIndex);
-                table.setValueAt((Object)
-                                receiptRecorder.findReceiptByIndex(selectedRowIndex).getItem(),
+                table.setValueAt(receiptRecorder.findReceiptByIndex(selectedRowIndex).getItem(),
                         selectedRowIndex, 2);
-                table.setValueAt((Object)
-                                receiptRecorder.findReceiptByIndex(selectedRowIndex).getAmount(),
+                table.setValueAt(receiptRecorder.findReceiptByIndex(selectedRowIndex).getAmount(),
                         selectedRowIndex, 3);
-                save();
                 break;
             }
             case DELETE_RECEIPT: {
@@ -140,7 +137,6 @@ public class ReceiptTable extends JFrame implements ActionListener {
                 }
                 receiptRecorder.removeReceiptByIndex(selectedRowIndex);
                 tableModel.removeRow(selectedRowIndex);
-                save();
                 break;
             }
             case CHANGE_BUDGET:
@@ -149,14 +145,15 @@ public class ReceiptTable extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: saves the receiptRecorder to file
     public void save() {
         try {
             jsonWriter.open();
             jsonWriter.write(receiptRecorder);
             jsonWriter.close();
-            JOptionPane.showMessageDialog(null,
-                    "Data saved");
+//            JOptionPane.showMessageDialog(null,
+//                    "Data saved");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
                     "Unable to save data");

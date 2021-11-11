@@ -64,23 +64,10 @@ public class AddReceipt extends JFrame implements ActionListener {
             double amount = Double.parseDouble(itemPrice.getText());
             receiptRecorder.addReceipt(amount, item);
 
-            save();
+            receiptTable.save();
             receiptTable.dispose();
             new ReceiptTable(receiptRecorder);
             dispose();
-        }
-    }
-
-    public void save() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(receiptRecorder);
-            jsonWriter.close();
-            JOptionPane.showMessageDialog(null,
-                    "Data saved");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Unable to save data");
         }
     }
 }
