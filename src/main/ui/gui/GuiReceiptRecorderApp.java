@@ -3,11 +3,15 @@ package ui.gui;
 import model.ReceiptRecorder;
 import persistence.JsonReader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import static com.apple.eio.FileManager.getResource;
+import static com.sun.tools.doclint.Entity.image;
 
 public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     private static final int frameHeight = 300;
@@ -73,8 +77,9 @@ public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     public void load() {
         try {
             this.receiptRecorder = jsonReader.read();
-            JOptionPane.showMessageDialog(null,
-                    "Data loaded \nStart to record your receipts ＾▽＾");
+            Image picture = ImageIO.read(getClass().getResource("./image/project_image.png"));
+            ImageIcon imageIcon = new ImageIcon(picture);
+            JOptionPane.showMessageDialog(null, imageIcon);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
                     "Unable to load data");
