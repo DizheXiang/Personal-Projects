@@ -46,3 +46,9 @@ Remove one receipt
 
 Wed Nov 24 12:39:08 PST 2021
 Change the budget
+
+## Phase 4: Task 3
+If I have more time, I'd like to add date is a new data inside receipts,
+so that the user is able to check the spending history for specific day. 
+Also, the gui version of ui has a high coupling which make this project 
+more fragile. I would try to reduce the coupling if I have more time.
