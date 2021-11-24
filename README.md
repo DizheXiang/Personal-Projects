@@ -19,3 +19,30 @@
 - As a user, I want to be able to set a budget
 - As a user, I want to be able to change a budget
 - As a user, I want to be able to check whether total spending exceed budget
+
+## Phase 4: Task 2
+### Sample EventLog
+
+Wed Nov 24 12:38:07 PST 2021
+Change the budget
+
+Wed Nov 24 12:38:07 PST 2021
+Add a new Receipt
+
+Wed Nov 24 12:38:07 PST 2021
+Add a new Receipt
+
+Wed Nov 24 12:38:27 PST 2021
+Add a new Receipt
+
+Wed Nov 24 12:38:44 PST 2021
+Receipt item changed
+
+Wed Nov 24 12:38:44 PST 2021
+Receipt amount changed
+
+Wed Nov 24 12:38:49 PST 2021
+Remove one receipt
+
+Wed Nov 24 12:39:08 PST 2021
+Change the budget

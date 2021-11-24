@@ -35,6 +35,7 @@ public class ReceiptRecorder implements Writable {
     public void addReceipt(double amount, String item) {
         Receipt receipt = new Receipt(amount, item);
         receipts.add(receipt);
+        EventLog.getInstance().logEvent(new Event("Add a new Receipt"));
     }
 
     // EFFECTS: find the receipt with given item
@@ -70,6 +71,7 @@ public class ReceiptRecorder implements Writable {
     // EFFECTS: remove the receipt with given item
     public void removeReceipt(String item) throws ReceiptDoesNotExistException {
         receipts.remove(findReceipt(item));
+        EventLog.getInstance().logEvent(new Event("Remove one receipt"));
     }
 
     // MODIFIES: this
@@ -82,6 +84,7 @@ public class ReceiptRecorder implements Writable {
     // EFFECTS: set the budget amount
     public void setBudget(double newAmount) {
         this.budget = newAmount;
+        EventLog.getInstance().logEvent(new Event("Change the budget"));
     }
 
     // EFFECTS: return the size of receiptRecorder
@@ -125,11 +128,9 @@ public class ReceiptRecorder implements Writable {
     public void removeReceiptByIndex(int itemIndex) {
         Receipt receipt = null;
         receipt = findReceiptByIndex(itemIndex);
-//        if (receipt == null) {
-//            JOptionPane.showMessageDialog(null,
-//                    "Invalid index");
-//        }
         receipts.remove(receipt);
+        EventLog.getInstance().logEvent(new Event("Remove one receipt"));
+
     }
 
     public Receipt findReceiptByIndex(int itemIndex) {

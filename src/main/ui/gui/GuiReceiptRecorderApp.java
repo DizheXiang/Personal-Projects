@@ -1,5 +1,7 @@
 package ui.gui;
 
+import model.Event;
+import model.EventLog;
 import model.ReceiptRecorder;
 import persistence.JsonReader;
 
@@ -11,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import static com.apple.eio.FileManager.getResource;
-import static com.sun.tools.doclint.Entity.image;
 
 public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     private static final int frameHeight = 300;
@@ -68,7 +69,15 @@ public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
                         null, "Goodbye, have a nice day ✧*٩(ˊᗜˋ*)و✧*");
                 receiptTable.dispose();
                 dispose();
+                printLog(EventLog.getInstance());
                 break;
+        }
+    }
+
+    private void printLog(EventLog eventLog) {
+        for (Event next : eventLog) {
+            String text = next.toString();
+            System.out.println(text + "\n");
         }
     }
 

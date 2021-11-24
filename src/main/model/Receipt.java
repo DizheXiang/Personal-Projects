@@ -26,11 +26,13 @@ public class Receipt implements Writable {
     // EFFECTS: change the amount of receipt
     public void changeAmount(double newAmount) {
         amount = newAmount;
+        EventLog.getInstance().logEvent(new Event("Receipt amount changed"));
     }
 
     // EFFECTS: change the item of receipt
     public void changeItem(String newItem) {
         item = newItem;
+        EventLog.getInstance().logEvent(new Event("Receipt item changed"));
     }
 
     @Override
