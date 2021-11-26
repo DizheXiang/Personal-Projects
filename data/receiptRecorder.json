@@ -2,11 +2,11 @@
     "receipts": [
         {
             "amount": 10,
-            "item": "A"
+            "item": "C"
         },
         {
-            "amount": 50,
-            "item": "C"
+            "amount": 100,
+            "item": "B"
         }
     ],
     "name": "My receipt recorder",
