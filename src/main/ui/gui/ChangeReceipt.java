@@ -9,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
-public class ChangeReceiptItem extends JFrame implements ActionListener {
+// generate a new frame to edit an existing receipt
+public class ChangeReceipt extends JFrame implements ActionListener {
     private JPanel panel;
     private JTextField itemName;
     private JTextField itemPrice;
@@ -20,8 +21,8 @@ public class ChangeReceiptItem extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/receiptRecorder.json";
     private JsonWriter jsonWriter;
 
-    public ChangeReceiptItem(ReceiptTable receiptTable,
-                             ReceiptRecorder receiptRecorder, int index) {
+    public ChangeReceipt(ReceiptTable receiptTable,
+                         ReceiptRecorder receiptRecorder, int index) {
         super("Change receipt item name");
         panel = new JPanel();
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -37,6 +38,7 @@ public class ChangeReceiptItem extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    // EFFECTS: produce the text field to enter the item name and amount of the new receipt
     private void changeReceipt() {
         JLabel itemNameLabel = new JLabel("Enter new item: ");
         itemNameLabel.setBounds(100, 50, 400, 20);
@@ -62,6 +64,8 @@ public class ChangeReceiptItem extends JFrame implements ActionListener {
     }
 
     @Override
+    //EFFECTS: if click the "Confirm" button then quit the current frame
+    // and add the receipt to the receipt table
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Confirm")) {

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+// generate a new frame to add a new receipt
 public class AddReceipt extends JFrame implements ActionListener {
     private JPanel panel;
     private JTextField itemName;
@@ -32,6 +33,7 @@ public class AddReceipt extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    // EFFECTS: produce the text field to enter the item name and amount of the new receipt
     private void setNewReceipt() {
         JLabel itemNameLabel = new JLabel("Enter item name you bought: ");
         itemNameLabel.setBounds(100, 50, 400, 20);
@@ -57,6 +59,8 @@ public class AddReceipt extends JFrame implements ActionListener {
     }
 
     @Override
+    //EFFECTS: if click the "Confirm" button then quit the current frame
+    // and add the receipt to the receipt table
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Confirm")) {

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+// a JTable which contain all the receipts
 public class ReceiptTable extends JFrame implements ActionListener {
     private final DefaultTableModel tableModel;
     private final JTable table;
@@ -61,6 +62,8 @@ public class ReceiptTable extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // EFFECTS: show the information related to budget
+    // and whether the total spending exceeds the budget
     private void generateLabel() {
         label1 = new JLabel("\nYour total expense is " + receiptRecorder.checkExpenses());
         if (receiptRecorder.checkBudget()) {
@@ -71,6 +74,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
         label3 = new JLabel("\nYour budget is " + receiptRecorder.getBudget());
     }
 
+    // EFFECTS: add all the buttons which are used to edit the table and budget
     private void setButtons() {
         JButton addItemButton = new JButton(ADD_RECEIPT);
         buttonBox.add(addItemButton);
@@ -94,6 +98,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
 
     }
 
+    // EFFECTS: generate table which its column represent the index, item, and amount for a receipt
     private void generateTableRows() {
         for (int i = 0; i < receiptRecorder.getReceipts().size(); i++) {
             Receipt receipt = receiptRecorder.getReceipts().get(i);
@@ -108,6 +113,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
 
     @SuppressWarnings("methodlength")
     @Override
+    // add command to each buttons
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
 
@@ -122,7 +128,7 @@ public class ReceiptTable extends JFrame implements ActionListener {
                             "Please select a receipt to change");
                     return;
                 }
-                new ChangeReceiptItem(this, receiptRecorder, selectedRowIndex);
+                new ChangeReceipt(this, receiptRecorder, selectedRowIndex);
                 table.setValueAt(receiptRecorder.findReceiptByIndex(selectedRowIndex).getItem(),
                         selectedRowIndex, 2);
                 table.setValueAt(receiptRecorder.findReceiptByIndex(selectedRowIndex).getAmount(),

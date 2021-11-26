@@ -6,8 +6,8 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
+// a new frame to edit budget
 public class EditBudget extends JFrame implements ActionListener {
     private JPanel jp;
     private JTextField newBudget;
@@ -31,6 +31,7 @@ public class EditBudget extends JFrame implements ActionListener {
         setLabels();
     }
 
+    // EFFECTS: produce the text field to enter the new budget
     private void setLabels() {
         JLabel budgetLabel = new JLabel("Enter new budget: ");
         budgetLabel.setBounds(50, 20, 200, 20);
@@ -48,6 +49,8 @@ public class EditBudget extends JFrame implements ActionListener {
     }
 
     @Override
+    //EFFECTS: if click the "Confirm" button then quit the current frame
+    // and add the receipt to the receipt tables
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Confirm")) {

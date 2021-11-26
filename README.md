@@ -51,4 +51,5 @@ Change the budget
 If I have more time, I'd like to add date is a new data inside receipts,
 so that the user is able to check the spending history for specific day. 
 Also, the gui version of ui has a high coupling which make this project 
-more fragile. I would try to reduce the coupling if I have more time.
+more fragile. For example, the ChangeReceipt class and AddReceipt class have very similiar
+functionality and structure. I would try to reduce the coupling if I have more time.

@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import static com.apple.eio.FileManager.getResource;
 
+// the gui version of application
 public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     private static final int frameHeight = 300;
     private static final int frameWidth = 475;
@@ -50,6 +51,7 @@ public class GuiReceiptRecorderApp extends JFrame implements ActionListener {
     }
 
     @Override
+    // EFFECTS: assign command to each button
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch (action) {
